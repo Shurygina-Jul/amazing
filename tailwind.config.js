@@ -10,10 +10,11 @@ module.exports = {
     },
     colors: {
       transparent: "transparent",
-      white: "#E8EFF7",
+      smoke: "#E8EFF7",
       night: "#1C334E",
       lazur: "#5B8CC4",
       grey: "#BACEE6",
+      red: "#E84545",
     },
     fontSize: {
       base: ["18px", "28px"],

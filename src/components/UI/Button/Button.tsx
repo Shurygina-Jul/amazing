@@ -5,9 +5,9 @@ import { StyledButton } from "./styles";
 import { IButton } from "./interface";
 
 function Button(props: IButton) {
-  const { text, onClick, disabled, theme = "dark", className } = props;
+  const { text, onClick, disabled, className } = props;
   return (
-    <StyledButton className={clsx(className)} onClick={onClick} disabled={disabled} theme={theme}>
+    <StyledButton className={clsx(className)} onClick={onClick} disabled={disabled}>
       {text}
     </StyledButton>
   );
