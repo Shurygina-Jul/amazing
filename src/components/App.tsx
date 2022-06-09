@@ -1,17 +1,15 @@
-import { SubmitHandler, useForm, Controller } from "react-hook-form";
-import DatePicker from "react-datepicker";
-
-import { Inputs } from "./interface";
+import { SubmitHandler, useForm } from "react-hook-form";
+import FormField from "./UI/FormField";
 
 function App() {
   const {
     register,
     handleSubmit,
-    watch,
-    control,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<any>();
   const onSubmit: SubmitHandler<any> = (data) => console.log(data);
+
+  const LABELS = ["title", "date", "author", "description"];
 
   return (
     <div className="pl-16 pr-16">
@@ -26,32 +24,11 @@ function App() {
           <legend>
             <h3>Форма создания / редактирования заметок / напоминаний</h3>
           </legend>
-          <label>
-            <p>Название</p>
-            <input
-              className="mb-2 block rounded border-2 border-lazur p-4"
-              {...register("title", { required: true })}
-            />
-            {errors.title && <span className="text-red">Это поле обязательно для заполнения</span>}
-          </label>
-          <label>
-            <p>Дата создания</p>
-            <input className="mb-2 block border-2 p-4" {...register("date", { required: true })} />
-            {errors.title && <span className="text-red">Это поле обязательно для заполнения</span>}
-          </label>
-          <label>
-            <p>Автор</p>
-            <input
-              className="mb-2 block border-2 p-4"
-              {...register("author", { required: true })}
-            />
-            {errors.title && <span className="text-red">Это поле обязательно для заполнения</span>}
-          </label>
-          <label>
-            <p>Описание</p>
-            <input className=" block border-2" {...register("description")} />
-          </label>
-          <div className=" mt-12 inline-block bg-lazur text-smoke">
+          <FormField label="title" register={register} required errors={errors} />
+          <FormField label="date" register={register} required errors={errors} />
+          <FormField label="author" register={register} required errors={errors} />
+          <FormField label="description" register={register} required errors={errors} />
+          <div className="inline-block bg-lazur text-smoke">
             <input type="submit" className="px-12 py-4" />
           </div>
         </fieldset>
