@@ -6,6 +6,6 @@ export const StyledButton = styled.button`
   &:disabled,
   [disabled],
   :disabled:hover {
-    ${tw`text-yellow cursor-auto bg-transparent opacity-30`};
+    ${tw` cursor-auto bg-transparent opacity-30`};
   }
 `;
