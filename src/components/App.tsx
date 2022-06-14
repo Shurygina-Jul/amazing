@@ -24,12 +24,14 @@ function App() {
   ];
   return (
     //comments
+    //comments 2
     <div className="pl-16 pr-16">
       <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
           <legend>
             <h3>Форма создания / редактирования заметок / напоминаний</h3>
           </legend>
+
           <>
             {INPUTS.map(({ label, name }: any, i: number) => (
               <LabelInput label={label} errors={errors.title} key={`${name}_${i}`}>
