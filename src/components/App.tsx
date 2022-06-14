@@ -20,6 +20,7 @@ function App() {
     { label: "Дата", name: "date", require: false },
     { label: "Автор", name: "author", require: false },
     { label: "Описание", name: "description", require: false },
+    { label: "Описание", name: "description", require: false },
   ];
   return (
     <div className="pl-16 pr-16">
