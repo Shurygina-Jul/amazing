@@ -5,5 +5,5 @@ export interface ILabelInput {
   className?: string;
   children: ReactNode;
   errors: any;
-  require?: boolean;
+  requiredd?: boolean;
 }

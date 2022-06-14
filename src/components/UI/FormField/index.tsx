@@ -15,7 +15,7 @@ type InputProps = {
 };
 
 function FormField({ label, register, required, errors }: InputProps) {
-  console.log(errors.title);
+  // console.log(errors.title);
   return (
     <label>
       <p>{label}</p>
