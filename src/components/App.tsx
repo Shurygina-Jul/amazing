@@ -23,6 +23,7 @@ function App() {
     { label: "Описание", name: "description", require: false },
   ];
   return (
+    //comments
     <div className="pl-16 pr-16">
       <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
