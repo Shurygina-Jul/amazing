@@ -4,6 +4,5 @@ export interface ILabelInput {
   label?: string;
   className?: string;
   children: ReactNode;
-  errors: any;
-  requiredd?: boolean;
+  errors?: any;
 }

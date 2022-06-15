@@ -16,15 +16,12 @@ function App() {
   const onSubmit: SubmitHandler<any> = (data) => console.log(data);
 
   const INPUTS: IInputs[] = [
-    { label: "Название", name: "title", require: true },
-    { label: "Дата", name: "date", require: false },
-    { label: "Автор", name: "author", require: false },
-    { label: "Описание", name: "description", require: false },
-    { label: "Описание", name: "description", require: false },
+    { label: "Название", name: "title" },
+    { label: "Дата", name: "date" },
+    { label: "Автор", name: "author" },
+    { label: "Описание", name: "description" },
   ];
   return (
-    //comments
-    //comments 2
     <div className="pl-16 pr-16">
       <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
@@ -33,9 +30,13 @@ function App() {
           </legend>
 
           <>
-            {INPUTS.map(({ label, name }: any, i: number) => (
-              <LabelInput label={label} errors={errors.title} key={`${name}_${i}`}>
-                <TextInput {...register(`${name}`, { required: `${require}` })} />
+            {INPUTS.map(({ label, name }, i: number) => (
+              <LabelInput label={label} errors={errors[name]} key={`${name}_${i}`}>
+                <TextInput
+                  {...register(`${name}`, {
+                    required: true,
+                  })}
+                />
               </LabelInput>
             ))}
             <LabelInput errors={errors.title}>
@@ -48,8 +49,8 @@ function App() {
                     placeholder="Выберите тип записи"
                     className=""
                     options={[
-                      { value: "note", label: "Note" },
-                      { value: "prompt", label: "Prompt" },
+                      { value: "note", label: "Заметка" },
+                      { value: "prompt", label: "Напоминание" },
                     ]}
                   />
                 )}
