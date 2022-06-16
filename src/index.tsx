@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import App from "components/App";
+import App from "pages/App";
 
 import "./assets/styles/index.css";
+
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+//comments
 root.render(
   <React.StrictMode>
     <App />

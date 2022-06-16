@@ -1,10 +1,10 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import Select from "react-select";
-import { IInputs } from "./interface";
-import Button from "./UI/Button/Button";
 
-import LabelInput from "./UI/LabelInput";
-import { TextInput } from "./UI/TextInput";
+import { IInputs } from "components/interface";
+import LabelInput from "components/UI/LabelInput";
+import { TextInput } from "components/UI/TextInput";
+import Button from "components/UI/Button";
 
 function App() {
   const {
