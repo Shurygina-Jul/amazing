@@ -1,7 +1,7 @@
 import tw, { styled } from "twin.macro";
 
 export const StyledButton = styled.button`
-  ${tw`border-2 p-[12px] min-w-[100px]`};
+  ${tw` p-[12px] min-w-[100px]`};
 
   &:disabled,
   [disabled],
