@@ -1,6 +1,6 @@
 import Header from "components/Header";
 import { Route, Routes } from "react-router";
-import { routesConfig } from "routes";
+import { routesConfig } from "routesConfig";
 
 function App() {
   return (

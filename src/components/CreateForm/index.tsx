@@ -6,15 +6,26 @@ import { TextInput } from "components/UI/TextInput";
 import Button from "components/UI/Button";
 
 import { INPUTS } from "./constants";
+import { add, $notes } from "store/index";
+import { useStore } from "effector-react";
 
 function CreateForm() {
+  const note = useStore($notes);
+
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<any>();
-  const onSubmit: SubmitHandler<any> = (data) => console.log(data);
+
+  const onSubmit: SubmitHandler<any> = (data) => {
+    add(data);
+    localStorage.setItem("tasks", JSON.stringify(note));
+    console.log("значение data" + JSON.stringify(data));
+    console.log("значение  note" + JSON.stringify(note));
+  };
+
   return (
     <>
       <form className="p-8" onSubmit={handleSubmit(onSubmit)}>

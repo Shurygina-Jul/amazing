@@ -7,7 +7,6 @@ import App from "pages/App";
 import "./assets/styles/index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
-//comments
 root.render(
   <React.StrictMode>
     <BrowserRouter>
