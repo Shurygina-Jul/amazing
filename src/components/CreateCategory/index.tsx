@@ -3,6 +3,7 @@ import LabelInput from "components/UI/LabelInput";
 import { TextInput } from "components/UI/TextInput";
 import { useStore } from "effector-react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { $category, add } from "./store";
 
 function CreateCategory() {
@@ -13,10 +14,15 @@ function CreateCategory() {
     formState: { errors },
   } = useForm<any>();
 
+  let navigate = useNavigate();
+
+  const category = useStore($category);
+
   const onSubmit: SubmitHandler<any> = (data) => {
-    data.id = Math.floor(Math.random() * 1000);
     add(data);
-    localStorage.setItem("category", JSON.stringify(data));
+    localStorage.setItem("category", JSON.stringify(category));
+    console.log("Категория успешно создана");
+    navigate("/create-task");
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

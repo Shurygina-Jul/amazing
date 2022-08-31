@@ -11,6 +11,8 @@ function Notes() {
   const validData = data && JSON.parse(data);
   // console.log(validData.length);
 
+  // let list: [] = JSON.parse(localStorage.getItem("tasks") as string);
+
   return (
     <div className="ml-auto mr-auto">
       <p>{validData?.length ? "Список очень важных дел" : "Пока не добавлено никаких записей"}</p>
