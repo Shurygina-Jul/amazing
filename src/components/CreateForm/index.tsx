@@ -1,16 +1,23 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import Select from "react-select";
+import { useNavigate } from "react-router";
+import { useStore } from "effector-react";
 
 import LabelInput from "components/UI/LabelInput";
 import { TextInput } from "components/UI/TextInput";
 import Button from "components/UI/Button";
 
+import { add, $notes } from "store";
+
 import { INPUTS } from "./constants";
-import { add, $notes } from "store/index";
-import { useStore } from "effector-react";
+
+import { IOption } from "./interface";
+import { $category } from "components/CreateCategory/store";
 
 function CreateForm() {
   const note = useStore($notes);
+
+  let navigate = useNavigate();
 
   const {
     register,
@@ -20,11 +27,16 @@ function CreateForm() {
   } = useForm<any>();
 
   const onSubmit: SubmitHandler<any> = (data) => {
+    data.id = Math.floor(Math.random() * 1000);
     add(data);
     localStorage.setItem("tasks", JSON.stringify(note));
-    console.log("значение data" + JSON.stringify(data));
-    console.log("значение  note" + JSON.stringify(note));
+    console.log("Заметка успешно создана");
+    navigate("/");
   };
+
+  function getOptions(): IOption[] {
+    return JSON.parse(localStorage.getItem("category") as string);
+  }
 
   return (
     <>
@@ -51,12 +63,9 @@ function CreateForm() {
                 render={({ field }) => (
                   <Select
                     {...field}
-                    placeholder="Выберите тип записи"
+                    placeholder="Выберите категорию"
                     className="mb-4 w-[240px]"
-                    options={[
-                      { value: "note", label: "заметка" },
-                      { value: "prompt", label: "напоминание" },
-                    ]}
+                    options={getOptions()}
                   />
                 )}
               />

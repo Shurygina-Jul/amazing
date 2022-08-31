@@ -13,6 +13,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.0",
+    "@types/react-router-dom": "^5.3.3",
     "clsx": "^1.1.1",
     "effector": "^22.3.0",
     "effector-localstorage": "^0.5.3",

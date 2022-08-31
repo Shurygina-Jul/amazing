@@ -1,7 +1,9 @@
+import Category from "pages/Category";
 import Main from "pages/Main";
 import Notes from "pages/Notes";
 
 export const routesConfig = [
-  { path: "/", element: Main },
-  { path: "/promts", element: Notes },
+  { path: "/", element: Notes },
+  { path: "/create-task", element: Main },
+  { path: "/create-category", element: Category },
 ];
