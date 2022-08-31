@@ -10,3 +10,5 @@ export interface IItem {
   // };
   type: any;
 }
+
+export interface IProps {}

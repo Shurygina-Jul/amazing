@@ -1,6 +1,5 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import Select from "react-select";
-import { useNavigate } from "react-router";
 import { useStore } from "effector-react";
 
 import LabelInput from "components/UI/LabelInput";
@@ -9,33 +8,32 @@ import Button from "components/UI/Button";
 
 import { add, $notes } from "store";
 
-import { INPUTS } from "./constants";
+import { getData, setData } from "lib/utils";
 
 import { IOption } from "./interface";
-import { $category } from "components/CreateCategory/store";
+
+import { INPUTS } from "./constants";
 
 function CreateForm() {
   const note = useStore($notes);
-
-  let navigate = useNavigate();
 
   const {
     register,
     control,
     handleSubmit,
-    formState: { errors },
+    reset,
+    formState: { errors, isDirty },
   } = useForm<any>();
 
   const onSubmit: SubmitHandler<any> = (data) => {
     data.id = Math.floor(Math.random() * 1000);
     add(data);
-    localStorage.setItem("tasks", JSON.stringify(note));
+    setData(note, "tasks");
     console.log("Заметка успешно создана");
-    navigate("/");
   };
 
   function getOptions(): IOption[] {
-    return JSON.parse(localStorage.getItem("category") as string);
+    return getData("category");
   }
 
   return (
@@ -72,7 +70,7 @@ function CreateForm() {
             </LabelInput>
           </>
           <div className="inline-block rounded-lg bg-lazur text-smoke">
-            <Button text="Добавить" type="submit" className="rounded-lg" />
+            <Button text="Добавить" type="submit" className="rounded-lg" disabled={!isDirty} />
           </div>
         </fieldset>
       </form>

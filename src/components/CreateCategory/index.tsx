@@ -11,7 +11,7 @@ function CreateCategory() {
     register,
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<any>();
 
   let navigate = useNavigate();
@@ -34,7 +34,7 @@ function CreateCategory() {
         />
       </LabelInput>
       <div className="inline-block rounded-lg bg-lazur text-smoke">
-        <Button text="Создать" type="submit" className="rounded-lg" />
+        <Button text="Создать" type="submit" className="rounded-lg" disabled={!isDirty} />
       </div>
     </form>
   );
