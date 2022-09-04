@@ -1,39 +1,98 @@
-import { useEvent, useList, useStore } from "effector-react";
 import * as React from "react";
+import { useEvent, useStore } from "effector-react";
+import { Controller, useForm } from "react-hook-form";
+import Select from "react-select";
+
+import LabelInput from "components/UI/LabelInput";
+import { TextInput } from "components/UI/TextInput";
+import Button from "components/UI/Button";
 
 import * as model from "./model";
+import { $category } from "components/CreateCategory/store";
 
 function SendMessage() {
-  //   const userName = useStore(model.$userName);
-  const messageText = useStore(model.$messageText);
+  const messageText = useStore(model.$message);
+  const messageDescription = useStore(model.$description);
   const messageSending = useStore(model.$messageSending);
 
-  const handleLogout = useEvent(model.logoutClicked);
   const handleTextChange = useEvent(model.messageTextChanged);
-  const handleEnterPress = useEvent(model.messageEnterPressed);
+  const handleDescriptionChange = useEvent(model.messageDescriptionChanged);
+
   const handleSendClick = useEvent(model.messageSendClicked);
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      handleEnterPress();
+  const {
+    register,
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isDirty },
+  } = useForm<any>();
+
+  function getData(): any[] | void {
+    const source = localStorage.getItem("category");
+    if (source) {
+      return JSON.parse(source);
     }
-  };
+    return undefined;
+  }
 
   return (
-    <div className="message-form">
-      {/* <h3>{userName}</h3> */}
-      <input
-        value={messageText}
-        onChange={(event) => handleTextChange(event.target.value)}
-        onKeyPress={handleKeyPress}
-        className="chat-input"
-        placeholder="Type a message..."
-      />
-      <button onClick={() => handleSendClick()} disabled={messageSending}>
-        {messageSending ? "Sending..." : "Send"}
-      </button>
-      <button onClick={() => handleLogout()}>Log out</button>
-    </div>
+    <form className="p-8" onSubmit={handleSubmit(() => handleSendClick())}>
+      <fieldset>
+        <legend>
+          <h3>Cоздать заметку или напоминание</h3>
+        </legend>
+
+        <LabelInput label="Название">
+          <TextInput
+            {...register("messageText", {
+              required: true,
+            })}
+            value={messageText}
+            onChange={(event) => handleTextChange(event.target.value)}
+            placeholder="Введите название"
+          />
+        </LabelInput>
+
+        <LabelInput label="Описание">
+          <TextInput
+            {...register("messageDescription", {
+              required: true,
+            })}
+            // value={messageDescription}
+            // onChange={(event) => handleDescriptionChange(event.target.value)}
+            placeholder="Введите описание"
+          />
+        </LabelInput>
+
+        <LabelInput errors={errors.title}>
+          <Controller
+            name="type"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                placeholder="Выберите категорию"
+                className="mb-4 w-[240px]"
+                options={getData() || []}
+              />
+            )}
+          />
+        </LabelInput>
+
+        <div className="inline-block rounded-lg bg-lazur text-smoke">
+          <Button
+            text="Добавить"
+            type="submit"
+            className="rounded-lg"
+            onClick={() => {
+              handleSendClick();
+            }}
+            disabled={!isDirty}
+          />
+        </div>
+      </fieldset>
+    </form>
   );
 }
 
