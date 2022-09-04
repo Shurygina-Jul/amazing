@@ -1,22 +1,51 @@
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import Select from "react-select";
-import { useStore } from "effector-react";
-
+import { INPUTS } from "components/CreateForm/constants";
 import LabelInput from "components/UI/LabelInput";
 import { TextInput } from "components/UI/TextInput";
+import { useEvent, useStore } from "effector-react";
+import Select from "react-select";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import {
+  $messageText,
+  $messageSending,
+  messageTextChanged,
+  messageEnterPressed,
+  messageSendClicked,
+} from "store/model";
 import Button from "components/UI/Button";
 
-//import { add, $notes } from "store";
+function SendMessage() {
+  const messageText = useStore($messageText);
+  const messageSending = useStore($messageSending);
 
-import { getData, setData } from "lib/utils";
+  const handleTextChange = useEvent(messageTextChanged);
+  const handleEnterPress = useEvent(messageEnterPressed);
+  const handleSendClick = useEvent(messageSendClicked);
 
-import { IOption } from "./interface";
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleEnterPress();
+    }
+  };
 
-import { INPUTS } from "./constants";
+  return (
+    <div className="message-form">
+      <input
+        value={messageText}
+        onChange={(event) => handleTextChange(event.target.value)}
+        onKeyPress={handleKeyPress}
+        className="chat-input"
+        placeholder="Type a message..."
+      />
+      <button onClick={() => handleSendClick()} disabled={messageSending}>
+        {messageSending ? "Sending..." : "Send"}
+      </button>
+    </div>
+  );
+}
 
-// function CreateForm() {
-//   //const note = useStore($notes);
+export default SendMessage;
 
+// function CreateTaskForm() {
 //   const {
 //     register,
 //     control,
@@ -25,16 +54,14 @@ import { INPUTS } from "./constants";
 //     formState: { errors, isDirty },
 //   } = useForm<any>();
 
-//   // const onSubmit: SubmitHandler<any> = (data) => {
-//   //   data.id = Math.floor(Math.random() * 1000);
-//   //   add(data);
-//   //   setData(note, "tasks");
-//   //   console.log("Заметка успешно создана");
-//   // };
+//   const onSubmit: SubmitHandler<any> = (data) => {
+//     data.id = Math.floor(Math.random() * 1000);
+//     console.log("Заметка успешно создана");
+//   };
 
-//   function getOptions(): IOption[] {
-//     return getData("category");
-//   }
+//   // function getOptions(): IOption[] {
+//   //   return getData("category");
+//   // }
 
 //   return (
 //     <>
@@ -63,7 +90,7 @@ import { INPUTS } from "./constants";
 //                     {...field}
 //                     placeholder="Выберите категорию"
 //                     className="mb-4 w-[240px]"
-//                     options={getOptions()}
+//                     // options={getOptions()}
 //                   />
 //                 )}
 //               />
@@ -78,4 +105,4 @@ import { INPUTS } from "./constants";
 //   );
 // }
 
-// export default CreateForm;
+// export default CreateTaskForm;

@@ -1,32 +1,26 @@
-import { useStore } from "effector-react";
-
-import Button from "components/UI/Button";
-import Card from "components/UI/Card";
-
-import { $notes, remove } from "store";
-import { useEffect, useState } from "react";
-import { getData } from "lib/utils";
+import { useEvent, useList, useStore } from "effector-react";
+import { $messageDeleting, $messages, messageDeleteClicked } from "store/model";
 
 function Notes() {
-  let list: any[] = getData("tasks");
+  const messageDeleting = useStore($messageDeleting);
+  const handleMessageDelete = useEvent(messageDeleteClicked);
+
+  const messages = useList($messages, {
+    keys: [messageDeleting],
+    fn: (message) => (
+      <div className="text-red" key={message.timestamp}>
+        <p>{message.text}</p>
+        <button onClick={() => handleMessageDelete(message)}>
+          {messageDeleting ? "Deleting" : "Delete"}
+        </button>
+      </div>
+    ),
+  });
 
   return (
-    <div className="ml-auto mr-auto">
-      <p>{list?.length ? "Список очень важных дел" : "Пока не добавлено никаких записей"}</p>
-      <ul className="grid grid-cols-5 gap-3">
-        {list?.map((item: any, index: number) => (
-          <li key={`${item.id}_${index}`}>
-            <Card task={item} />
-            <Button
-              className="mt-4 rounded-lg bg-red"
-              text="Удалить"
-              onClick={() => {
-                remove(item.id);
-              }}
-            />
-          </li>
-        ))}
-      </ul>
+    <div>
+      {messages}
+      <>{console.log(messages)}</>
     </div>
   );
 }
