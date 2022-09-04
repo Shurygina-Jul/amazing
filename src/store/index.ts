@@ -1,4 +1,3 @@
-import { setData } from "./../lib/utils";
 import { createEffect, createEvent, createStore } from "effector";
 
 import { IItem } from "./interface";
@@ -30,7 +29,7 @@ export const removeTask = (state: IItem[], id: number | string) => {
   let test = state.filter((task) => task.id !== id);
   console.log(test);
 
-  return setData(test, "tasks");
+  // return setData(test, "tasks");
 
   //return [test];
 };
@@ -52,3 +51,38 @@ export const getData = (DATA_KEY: any): any => {
 // // Привязываем к эффекту
 // updateSaveFx.use(setData(data, "tasks"));
 // updategetFx.use(getData("tasks"));
+
+export function wait(timeout = Math.random() * 1500) {
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+}
+
+interface Author {
+  id: string;
+  name: string;
+}
+
+export interface Message {
+  id: string;
+  author: Author;
+  text: string;
+  timestamp: number;
+}
+const LocalStorageKey = "effector-example-history";
+
+function loadHistory(): Message[] | void {
+  const source = localStorage.getItem(LocalStorageKey);
+  if (source) {
+    return JSON.parse(source);
+  }
+  return undefined;
+}
+
+function saveHistory(messages: Message[]) {
+  localStorage.setItem(LocalStorageKey, JSON.stringify(messages));
+}
+
+export const messagesLoadFx = createEffect<void, Message[], Error>(async () => {
+  const history = loadHistory();
+  await wait();
+  return history ?? [];
+});
