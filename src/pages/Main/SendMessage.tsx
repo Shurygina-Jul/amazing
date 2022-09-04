@@ -4,7 +4,7 @@ import * as React from "react";
 import * as model from "./model";
 
 function SendMessage() {
-  const userName = useStore(model.$userName);
+  //   const userName = useStore(model.$userName);
   const messageText = useStore(model.$messageText);
   const messageSending = useStore(model.$messageSending);
 
@@ -21,7 +21,7 @@ function SendMessage() {
 
   return (
     <div className="message-form">
-      <h3>{userName}</h3>
+      {/* <h3>{userName}</h3> */}
       <input
         value={messageText}
         onChange={(event) => handleTextChange(event.target.value)}

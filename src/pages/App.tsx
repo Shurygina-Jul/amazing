@@ -6,13 +6,12 @@ import Main from "./Main";
 function App() {
   return (
     <div>
-      {/* <Header /> */}
-      <Main />
-      {/* <Routes>
+      <Header />
+      <Routes>
         {routesConfig.map(({ path, element }, index) => (
           <Route key={index} path={path} element={element()} />
         ))}
-      </Routes> */}
+      </Routes>
     </div>
   );
 }

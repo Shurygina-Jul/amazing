@@ -2,14 +2,14 @@ import { createEffect } from "effector";
 import { createOid } from "shared/lib/oid";
 import { wait } from "shared/lib/wait";
 
-interface Author {
-  id: string;
-  name: string;
-}
+// interface Author {
+//   id: string;
+//   name: string;
+// }
 
 export interface Message {
   id: string;
-  author: Author;
+  //author: Author;
   text: string;
   timestamp: number;
 }
@@ -39,26 +39,24 @@ export const messagesLoadFx = createEffect<void, Message[], Error>(async () => {
 
 interface SendMessage {
   text: string;
-  author: Author;
+  //author: Author;
 }
 
 // But we can use type inferring and set arguments types in the handler defintion.
 // Hover your cursor on `messagesLoadFx` to see the inferred types:
 // `Effect<{ text: string; authorId: string; authorName: string }, void, Error>`
-export const messageSendFx = createEffect(
-  async ({ text, author }: SendMessage) => {
-    const message: Message = {
-      id: createOid(),
-      author,
-      timestamp: Date.now(),
-      text,
-    };
-    const history = await messagesLoadFx();
-    saveHistory([...history, message]);
-    await wait();
-    return message;
-  }
-);
+export const messageSendFx = createEffect(async ({ text }: SendMessage) => {
+  const message: Message = {
+    id: createOid(),
+    //author,
+    timestamp: Date.now(),
+    text,
+  };
+  const history = await messagesLoadFx();
+  saveHistory([...history, message]);
+  await wait();
+  return message;
+});
 
 // Please, note that we will `wait()` for `messagesLoadFx` and `wait()` in the current effect
 // Also, note that `saveHistory` and `loadHistory` can throw exceptions,
