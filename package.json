@@ -15,6 +15,7 @@
     "@types/react-dom": "^18.0.0",
     "@types/react-router-dom": "^5.3.3",
     "clsx": "^1.1.1",
+    "dayjs": "^1.11.5",
     "effector": "^22.3.0",
     "effector-localstorage": "^0.5.3",
     "effector-react": "^22.0.6",

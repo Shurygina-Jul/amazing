@@ -1,69 +1,36 @@
+import dayjs from "dayjs";
 import { createEffect } from "effector";
-import { createOid } from "shared/lib/oid";
-import { wait } from "shared/lib/wait";
 
-// interface Author {
-//   id: string;
-//   name: string;
-// }
+import { createId, getData, setData, wait } from "../lib/helpers";
 
-export interface Message {
-  id: string;
-  //author: Author;
-  text: string;
-  timestamp: number;
-}
+import { Message } from "shared/lib/interface";
+import { SendMessage } from "./interface";
 
-const LocalStorageKey = "effector-example-history";
-
-function loadHistory(): Message[] | void {
-  const source = localStorage.getItem(LocalStorageKey);
-  if (source) {
-    return JSON.parse(source);
-  }
-  return undefined;
-}
-
-function saveHistory(messages: Message[]) {
-  localStorage.setItem(LocalStorageKey, JSON.stringify(messages));
-}
-
-// Here effect defined with static types. void defines no arguments.
-// Second type argument defines a successful result type.
-// Third argument is optional and defines a failure result type.
 export const messagesLoadFx = createEffect<void, Message[], Error>(async () => {
-  const history = loadHistory();
+  const history = getData();
   await wait();
   return history ?? [];
 });
 
-interface SendMessage {
-  text: string;
-  //author: Author;
-}
+export const messageSendFx = createEffect(async ({ text, description }: SendMessage) => {
+  //console.log(text, description);
 
-// But we can use type inferring and set arguments types in the handler defintion.
-// Hover your cursor on `messagesLoadFx` to see the inferred types:
-// `Effect<{ text: string; authorId: string; authorName: string }, void, Error>`
-export const messageSendFx = createEffect(async ({ text }: SendMessage) => {
   const message: Message = {
-    id: createOid(),
-    //author,
+    id: createId(),
     timestamp: Date.now(),
+    date: dayjs(new Date().toString()).format("YYYY-MM-DD HH:mm:ss"),
     text,
+    //description,
   };
   const history = await messagesLoadFx();
-  saveHistory([...history, message]);
+  setData([...history, message]);
   await wait();
   return message;
 });
 
-// Please, note that we will `wait()` for `messagesLoadFx` and `wait()` in the current effect
-// Also, note that `saveHistory` and `loadHistory` can throw exceptions,
-// in that case effect will trigger `messageDeleteFx.fail` event.
 export const messageDeleteFx = createEffect(async (message: Message) => {
   const history = await messagesLoadFx();
   const updated = history.filter((found) => found.id !== message.id);
   await wait();
-  saveHistory(updated);
+  setData(updated);
 });

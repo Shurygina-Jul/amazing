@@ -1,7 +1,8 @@
-import { useEvent, useList, useStore } from "effector-react";
 import * as React from "react";
-import Form from "./Form";
+import { useEvent } from "effector-react";
+
 import History from "./History";
+import SendMessage from "./SendMessage";
 
 import * as model from "./model";
 
@@ -12,9 +13,9 @@ export function Main() {
   }, []);
 
   return (
-    <div className="parent">
+    <div>
       <History />
-      <Form />
+      <SendMessage />
     </div>
   );
 }

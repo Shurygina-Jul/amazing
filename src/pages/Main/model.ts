@@ -1,21 +1,31 @@
 import { createEvent, createStore, merge, sample } from "effector";
-import { Message, messageApi } from "shared/api";
+import { messageApi } from "shared/api";
+import { Message } from "shared/lib/interface";
 import { messageSendFx } from "../../shared/api/message";
 
+//все заметки
 export const $messages = createStore<Message[]>([]);
-export const $messageText = createStore("");
+//название
+export const $message = createStore<any>("");
+//описание
+export const $description = createStore<any>("");
+
+//состояние формы и ее изменение
+export const $test = createStore<any>({});
+export const testChanged = createEvent<any>("");
+
+$test.on(testChanged, (_, payload) => console.log(payload?.text));
 
 export const $messageDeleting = messageApi.messageDeleteFx.pending;
 export const $messageSending = messageApi.messageSendFx.pending;
 
-// And the events report just what happened
 export const pageMounted = createEvent();
+
 export const messageDeleteClicked = createEvent<Message>();
 export const messageSendClicked = createEvent();
-export const messageEnterPressed = createEvent();
-export const messageTextChanged = createEvent<string>();
-export const loginClicked = createEvent();
-export const logoutClicked = createEvent();
+
+export const messageTextChanged = createEvent<any>();
+export const messageDescriptionChanged = createEvent<any>();
 
 sample({
   clock: pageMounted,
@@ -23,13 +33,16 @@ sample({
 });
 
 $messages.on(messageApi.messagesLoadFx.doneData, (_, messages) => messages);
-$messageText.on(messageTextChanged, (_, text) => text);
 
-const messageSend = merge([messageEnterPressed, messageSendClicked]);
+$message.on(messageTextChanged, (_, text) => text);
+$description.on(messageDescriptionChanged, (_, description) => description);
+
+//TODO:  убрать
+const messageSend = merge([messageSendClicked]);
 
 sample({
   clock: messageSend,
-  source: { text: $messageText },
+  source: { text: $message, description: $description },
   target: messageApi.messageSendFx,
 });
 
@@ -38,12 +51,12 @@ $messages.on(messageApi.messageSendFx.doneData, (messages, newMessage) => [
   newMessage,
 ]);
 
-$messageText.on(messageSendFx, () => "");
+$message.on(messageSendFx, () => {});
 
 sample({
   clock: messageSendFx.fail,
-  fn: ({ params }) => params.text,
-  target: $messageText,
+  fn: ({ params }) => params.description,
+  target: $message,
 });
 
 sample({

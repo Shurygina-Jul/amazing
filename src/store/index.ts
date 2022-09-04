@@ -27,7 +27,7 @@ export const addTask = (state: IItem[], data: IItem) => {
 //хендлер на удаление
 export const removeTask = (state: IItem[], id: number | string) => {
   let test = state.filter((task) => task.id !== id);
-  console.log(test);
+  //console.log(test);
 
   // return setData(test, "tasks");
 
