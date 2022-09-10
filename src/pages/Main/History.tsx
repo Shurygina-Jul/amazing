@@ -9,13 +9,13 @@ function History() {
 
   const list = useList(model.$messages, {
     keys: [messageDeleting],
-    fn: (message) => (
+    fn: (todo) => (
       <div>
         <Card
-          message={message}
-          key={message.timestamp}
+          message={todo}
+          key={todo.timestamp}
           button={{
-            onClick: () => handleMessageDelete(message),
+            onClick: () => handleMessageDelete(todo),
             disabled: messageDeleting,
             name: "Удалить",
           }}
