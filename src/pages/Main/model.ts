@@ -1,70 +1,62 @@
-import { createEvent, createStore, merge, sample } from "effector";
-import { messageApi } from "shared/api";
-import { Message } from "shared/lib/interface";
-import { messageSendFx } from "../../shared/api/message";
+import { createEvent, createStore, sample } from "effector";
+
+import { todoApi } from "shared/api";
+import { Todo } from "shared/lib/interface";
+import { todoSendFx } from "../../shared/api/todo";
 
 //все заметки
-export const $messages = createStore<Message[]>([]);
+export const $todos = createStore<Todo[]>([]);
 //название
-export const $messageText = createStore<any>("");
+export const $todoTitle = createStore<any>("");
 //описание
 export const $description = createStore<any>("");
 
-//состояние формы и ее изменение
-// export const $test = createStore<any>({});
-// export const testChanged = createEvent<any>("");
-
-// $test.on(testChanged, (_, payload) => console.log(payload?.text));
-
-export const $messageDeleting = messageApi.messageDeleteFx.pending;
-export const $messageSending = messageApi.messageSendFx.pending;
+export const $todoDeleting = todoApi.todoDeleteFx.pending;
+export const $todoSending = todoApi.todoSendFx.pending;
 
 export const pageMounted = createEvent();
 
-export const messageDeleteClicked = createEvent<Message>();
-export const messageSendClicked = createEvent();
+export const todoDeleteClicked = createEvent<Todo>();
+export const todoSendClicked = createEvent();
 export const messageTextChanged = createEvent<any>();
 export const messageDescriptionChanged = createEvent<any>();
 
 sample({
   clock: pageMounted,
-  target: [messageApi.messagesLoadFx],
+  target: [todoApi.todosLoadFx],
 });
 
-$messages.on(messageApi.messagesLoadFx.doneData, (_, messages) => messages);
+$todos.on(todoApi.todosLoadFx.doneData, (_, todos) => todos);
 
-$messageText.on(messageTextChanged, (_, text) => text);
+$todoTitle.on(messageTextChanged, (_, title) => title);
 $description.on(messageDescriptionChanged, (_, description) => description);
 
 //отправка описания и текста
 sample({
-  clock: messageSendClicked,
-  source: { text: $messageText, description: $description },
+  clock: todoSendClicked,
+  source: { text: $todoTitle, description: $description },
   filter: (form): form is { text: string; description: string } => {
     return form.text !== null;
   },
-  target: messageApi.messageSendFx,
+  target: todoApi.todoSendFx,
 });
 
-$messages.on(messageApi.messageSendFx.doneData, (messages, newMessage) => [
-  ...messages,
-  newMessage,
-]);
+$todos.on(todoApi.todoSendFx.doneData, (todos, newTodo) => [...todos, newTodo]);
 
-$messageText.on(messageSendFx, () => "");
-$description.on(messageSendFx, () => "");
+$todoTitle.on(todoSendFx, () => "");
+$description.on(todoSendFx, () => "");
 
 sample({
-  clock: messageSendFx.fail,
+  clock: todoSendFx.fail,
   fn: ({ params }) => params.text && params.description,
-  target: $messageText || $description,
+  target: $todoTitle || $description,
 });
 
 sample({
-  clock: messageDeleteClicked,
-  target: messageApi.messageDeleteFx,
+  clock: todoDeleteClicked,
+  target: todoApi.todoDeleteFx,
 });
 
-$messages.on(messageApi.messageDeleteFx.done, (messages, { params: toDelete }) =>
-  messages.filter((message) => message.id !== toDelete.id),
+$todos.on(todoApi.todoDeleteFx.done, (todos, { params: toDelete }) =>
+  todos.filter((todo) => todo.id !== toDelete.id),
 );

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useEvent, useStore } from "effector-react";
 import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
@@ -8,17 +7,16 @@ import { TextInput } from "components/UI/TextInput";
 import Button from "components/UI/Button";
 
 import * as model from "./model";
-import { $category } from "components/CreateCategory/store";
 
-function SendMessage() {
-  const messageText = useStore(model.$messageText);
+function SendTodo() {
+  const todoTitle = useStore(model.$todoTitle);
   const messageDescription = useStore(model.$description);
-  const messageSending = useStore(model.$messageSending);
+  const messageSending = useStore(model.$todoSending);
 
   const handleTextChange = useEvent(model.messageTextChanged);
   const handleDescriptionChange = useEvent(model.messageDescriptionChanged);
 
-  const handleSendClick = useEvent(model.messageSendClicked);
+  const handleSendClick = useEvent(model.todoSendClicked);
 
   const {
     register,
@@ -48,7 +46,7 @@ function SendMessage() {
             {...register("messageText", {
               required: true,
             })}
-            value={messageText}
+            value={todoTitle}
             onChange={(event) => handleTextChange(event.target.value)}
             placeholder="Введите название"
           />
@@ -88,4 +86,4 @@ function SendMessage() {
   );
 }
 
-export default SendMessage;
+export default SendTodo;

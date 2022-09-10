@@ -1,4 +1,4 @@
-export interface Message {
+export interface Todo {
   id: string;
   timestamp: number;
   date: string;

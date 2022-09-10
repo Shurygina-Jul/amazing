@@ -1,8 +1,8 @@
-import { Message } from "./interface";
+import { Todo } from "./interface";
 
 const LocalStorageKey = "todoList";
 
-export function getData(): Message[] | void {
+export function getData(): Todo[] | void {
   const source = localStorage.getItem(LocalStorageKey);
   if (source) {
     return JSON.parse(source);
@@ -10,7 +10,7 @@ export function getData(): Message[] | void {
   return undefined;
 }
 
-export function setData(messages: Message[]) {
+export function setData(messages: Todo[]) {
   localStorage.setItem(LocalStorageKey, JSON.stringify(messages));
 }
 

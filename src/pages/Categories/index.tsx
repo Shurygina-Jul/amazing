@@ -1,9 +1,12 @@
-import CreateCategory from "components/CreateCategory";
-import Button from "components/UI/Button";
 import { useNavigate } from "react-router";
+
+import Button from "components/UI/Button";
+
+import CreateCategory from "./CreateCategory";
 
 function Category() {
   let navigate = useNavigate();
+
   return (
     <>
       <CreateCategory />

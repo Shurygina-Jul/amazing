@@ -1,4 +1,4 @@
-export interface SendMessage {
-  text: any;
-  description?: any;
+export interface SendTodo {
+  text: string;
+  description?: string;
 }
