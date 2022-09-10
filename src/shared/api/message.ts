@@ -20,7 +20,7 @@ export const messageSendFx = createEffect(async ({ text, description }: SendMess
     timestamp: Date.now(),
     date: dayjs(new Date().toString()).format("YYYY-MM-DD HH:mm:ss"),
     text,
-    //description,
+    description,
   };
   const history = await messagesLoadFx();
   setData([...history, message]);

@@ -59,8 +59,8 @@ function SendMessage() {
             {...register("messageDescription", {
               required: true,
             })}
-            // value={messageDescription}
-            // onChange={(event) => handleDescriptionChange(event.target.value)}
+            value={messageDescription}
+            onChange={(event) => handleDescriptionChange(event.target.value)}
             placeholder="Введите описание"
           />
         </LabelInput>

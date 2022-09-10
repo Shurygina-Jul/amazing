@@ -10,12 +10,6 @@ export const $message = createStore<any>("");
 //описание
 export const $description = createStore<any>("");
 
-//состояние формы и ее изменение
-export const $test = createStore<any>({});
-export const testChanged = createEvent<any>("");
-
-$test.on(testChanged, (_, payload) => console.log(payload?.text));
-
 export const $messageDeleting = messageApi.messageDeleteFx.pending;
 export const $messageSending = messageApi.messageSendFx.pending;
 
@@ -38,10 +32,10 @@ $message.on(messageTextChanged, (_, text) => text);
 $description.on(messageDescriptionChanged, (_, description) => description);
 
 //TODO:  убрать
-const messageSend = merge([messageSendClicked]);
+//const messageSend = merge([messageSendClicked]);
 
 sample({
-  clock: messageSend,
+  clock: messageSendClicked,
   source: { text: $message, description: $description },
   target: messageApi.messageSendFx,
 });
@@ -55,7 +49,7 @@ $message.on(messageSendFx, () => {});
 
 sample({
   clock: messageSendFx.fail,
-  fn: ({ params }) => params.description,
+  fn: ({ params }) => params,
   target: $message,
 });
 
