@@ -11,7 +11,7 @@ import * as model from "./model";
 import { $category } from "components/CreateCategory/store";
 
 function SendMessage() {
-  const messageText = useStore(model.$message);
+  const messageText = useStore(model.$messageText);
   const messageDescription = useStore(model.$description);
   const messageSending = useStore(model.$messageSending);
 
@@ -59,8 +59,8 @@ function SendMessage() {
             {...register("messageDescription", {
               required: true,
             })}
-            // value={messageDescription}
-            // onChange={(event) => handleDescriptionChange(event.target.value)}
+            value={messageDescription}
+            onChange={(event) => handleDescriptionChange(event.target.value)}
             placeholder="Введите описание"
           />
         </LabelInput>
@@ -81,15 +81,7 @@ function SendMessage() {
         </LabelInput>
 
         <div className="inline-block rounded-lg bg-lazur text-smoke">
-          <Button
-            text="Добавить"
-            type="submit"
-            className="rounded-lg"
-            onClick={() => {
-              handleSendClick();
-            }}
-            disabled={!isDirty}
-          />
+          <Button text="Добавить" type="submit" className="rounded-lg" disabled={!isDirty} />
         </div>
       </fieldset>
     </form>

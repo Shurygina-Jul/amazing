@@ -13,14 +13,14 @@ export const messagesLoadFx = createEffect<void, Message[], Error>(async () => {
 });
 
 export const messageSendFx = createEffect(async ({ text, description }: SendMessage) => {
-  //console.log(text, description);
+  console.log(text, description);
 
   const message: Message = {
     id: createId(),
     timestamp: Date.now(),
     date: dayjs(new Date().toString()).format("YYYY-MM-DD HH:mm:ss"),
     text,
-    //description,
+    description,
   };
   const history = await messagesLoadFx();
   setData([...history, message]);

@@ -6,15 +6,15 @@ import { messageSendFx } from "../../shared/api/message";
 //все заметки
 export const $messages = createStore<Message[]>([]);
 //название
-export const $message = createStore<any>("");
+export const $messageText = createStore<any>("");
 //описание
 export const $description = createStore<any>("");
 
 //состояние формы и ее изменение
-export const $test = createStore<any>({});
-export const testChanged = createEvent<any>("");
+// export const $test = createStore<any>({});
+// export const testChanged = createEvent<any>("");
 
-$test.on(testChanged, (_, payload) => console.log(payload?.text));
+// $test.on(testChanged, (_, payload) => console.log(payload?.text));
 
 export const $messageDeleting = messageApi.messageDeleteFx.pending;
 export const $messageSending = messageApi.messageSendFx.pending;
@@ -23,7 +23,6 @@ export const pageMounted = createEvent();
 
 export const messageDeleteClicked = createEvent<Message>();
 export const messageSendClicked = createEvent();
-
 export const messageTextChanged = createEvent<any>();
 export const messageDescriptionChanged = createEvent<any>();
 
@@ -34,15 +33,16 @@ sample({
 
 $messages.on(messageApi.messagesLoadFx.doneData, (_, messages) => messages);
 
-$message.on(messageTextChanged, (_, text) => text);
+$messageText.on(messageTextChanged, (_, text) => text);
 $description.on(messageDescriptionChanged, (_, description) => description);
 
-//TODO:  убрать
-const messageSend = merge([messageSendClicked]);
-
+//отправка описания и текста
 sample({
-  clock: messageSend,
-  source: { text: $message, description: $description },
+  clock: messageSendClicked,
+  source: { text: $messageText, description: $description },
+  filter: (form): form is { text: string; description: string } => {
+    return form.text !== null;
+  },
   target: messageApi.messageSendFx,
 });
 
@@ -51,12 +51,13 @@ $messages.on(messageApi.messageSendFx.doneData, (messages, newMessage) => [
   newMessage,
 ]);
 
-$message.on(messageSendFx, () => {});
+$messageText.on(messageSendFx, () => "");
+$description.on(messageSendFx, () => "");
 
 sample({
   clock: messageSendFx.fail,
-  fn: ({ params }) => params.description,
-  target: $message,
+  fn: ({ params }) => params.text && params.description,
+  target: $messageText || $description,
 });
 
 sample({
