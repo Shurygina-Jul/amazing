@@ -1,21 +1,21 @@
-import * as React from "react";
+import { useEffect } from "react";
 import { useEvent } from "effector-react";
 
-import History from "./History";
-import SendMessage from "./SendMessage";
+import Todos from "./Todos";
+import SendTodo from "./SendTodo";
 
 import * as model from "./model";
 
 export function Main() {
   const handlePageMount = useEvent(model.pageMounted);
-  React.useEffect(() => {
+  useEffect(() => {
     handlePageMount();
   }, []);
 
   return (
     <div>
-      <History />
-      <SendMessage />
+      <Todos />
+      <SendTodo />
     </div>
   );
 }

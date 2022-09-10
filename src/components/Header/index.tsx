@@ -8,11 +8,11 @@ function Header() {
           <NavLink to="/create-category">Создать категорию</NavLink>
         </li>
         <li className="mr-4">
-          <NavLink to="/create-task">Добавить запись</NavLink>
+          <NavLink to="/">Добавить запись</NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to="/">Список задач</NavLink>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );

@@ -1,7 +1,8 @@
-import Header from "components/Header";
 import { Route, Routes } from "react-router";
+
+import Header from "components/Header";
+
 import { routesConfig } from "routesConfig";
-import Main from "./Main";
 
 function App() {
   return (

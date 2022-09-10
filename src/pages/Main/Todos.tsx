@@ -3,12 +3,12 @@ import { useEvent, useList, useStore } from "effector-react";
 
 import * as model from "./model";
 
-function History() {
-  const messageDeleting = useStore(model.$messageDeleting);
-  const handleMessageDelete = useEvent(model.messageDeleteClicked);
+function Todos() {
+  const todoDeleting = useStore(model.$todoDeleting);
+  const handleMessageDelete = useEvent(model.todoDeleteClicked);
 
-  const list = useList(model.$messages, {
-    keys: [messageDeleting],
+  const list = useList(model.$todos, {
+    keys: [todoDeleting],
     fn: (todo) => (
       <div>
         <Card
@@ -16,7 +16,7 @@ function History() {
           key={todo.timestamp}
           button={{
             onClick: () => handleMessageDelete(todo),
-            disabled: messageDeleting,
+            disabled: todoDeleting,
             name: "Удалить",
           }}
         />
@@ -26,4 +26,4 @@ function History() {
 
   return <div className="grid grid-cols-3">{list}</div>;
 }
-export default History;
+export default Todos;
