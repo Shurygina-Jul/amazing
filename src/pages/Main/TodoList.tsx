@@ -10,6 +10,7 @@ function TodoList() {
     <>
       {store.todos.map((todo) => (
         <div key={todo.id}>
+          <div>Дата создания {todo.date}</div>
           <Checkbox checked={todo.done} onClick={() => toggle(todo.id)} />
           <Input
             value={todo.title}

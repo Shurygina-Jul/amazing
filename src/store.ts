@@ -1,11 +1,13 @@
+import dayjs from "dayjs";
 import { createEvent, createStore, createEffect } from "effector";
+import { createId } from "shared/lib/helpers";
 
-// Standard interface and functions
 export interface Todo {
   id: number;
   title: string;
   description: string;
   done: boolean;
+  date: string;
 }
 
 export const updateTodo = (todos: Todo[], id: number, title: string, description: string): Todo[] =>
@@ -27,17 +29,17 @@ export const removeTodo = (todos: Todo[], id: number): Todo[] =>
 export const addTodoToList = (todos: Todo[], title: string, description: string): Todo[] => [
   ...todos,
   {
-    id: Math.max(0, Math.max(...todos.map(({ id }) => id))) + 1,
+    id: Number(createId()),
     title,
     description,
     done: false,
+    date: dayjs(new Date().toString()).format("YYYY-MM-DD HH:mm:ss"),
   },
 ];
 
-// Effector implementation
 interface Store {
   todos: Todo[];
-  newTodo: any;
+  newTodo?: any;
 }
 export const setNewTodo = createEvent<{ title: string; description: string }>();
 export const addTodo = createEvent();
