@@ -16,9 +16,9 @@ export function Main() {
 
   return (
     <div>
-      <Todos />
+      {/* <Todos />
       <SendTodo />
-      <hr />
+      <hr /> */}
       <TodoList />
       <Form />
     </div>
