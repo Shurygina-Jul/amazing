@@ -1,34 +1,45 @@
-import { Button, Checkbox, Input } from "@mui/material";
-import { useStore } from "effector-react";
+import { useEvent, useList, useStore } from "effector-react";
 
-import $store, { update, toggle, remove } from "../../store";
+import { Button, Checkbox, Input } from "@mui/material";
+
+import { $tasks, $todoDeleting, todoDeleteClicked } from "store";
 
 function TodoList() {
-  const store = useStore($store);
+  const tasks = useStore($tasks);
+  console.log("tasks", tasks);
 
-  return (
-    <>
-      {store.todos.map((todo) => (
-        <div key={todo.id}>
-          <div>Дата создания {todo.date}</div>
-          <Checkbox checked={todo.done} onClick={() => toggle(todo.id)} />
-          <Input
-            value={todo.title}
-            onChange={(event) =>
-              update({ id: todo.id, title: event.target.value, description: todo.description })
-            }
-          />
-          <Input
-            value={todo.description}
-            onChange={(event) =>
-              update({ id: todo.id, title: todo.title, description: event.target.value })
-            }
-          />
-          <Button onClick={() => remove(todo.id)}>Delete</Button>
-        </div>
-      ))}
-    </>
-  );
+  const todoDeleting = useStore($todoDeleting);
+  const handleMessageDelete = useEvent(todoDeleteClicked);
+
+  const list = useList($tasks, {
+    keys: [todoDeleting],
+    fn: (task) => (
+      <div>
+        <div>Дата создания {task.date}</div>
+        <Checkbox
+          checked={task.done}
+          //onClick={() => toggleTodo(task.id)}
+        />
+        <Input
+          value={task.title}
+          // onChange={(event) =>
+          //   updateTask({ id: task.id, title: event.target.value, description: task.description })
+          // }
+        />
+        <Input
+          value={task.description}
+          // onChange={(event) =>
+          //   updateTask({ id: task.id, title: task.title, description: event.target.value })
+          // }
+        />
+        <Button onClick={() => handleMessageDelete(task)} disabled={todoDeleting}>
+          Delete
+        </Button>
+      </div>
+    ),
+  });
+
+  return <div>{list}</div>;
 }
 
 export default TodoList;
