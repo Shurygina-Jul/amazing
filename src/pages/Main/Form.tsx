@@ -1,6 +1,8 @@
-import Button from "components/UI/Button";
 import { useForm } from "react-hook-form";
-import { addTodo, setNewTodo } from "store";
+
+import Button from "components/UI/Button";
+
+import { addTask } from "store";
 
 function Form() {
   const {
@@ -12,8 +14,8 @@ function Form() {
 
   const onSubmit = async (data: any) => {
     // console.log(data);
-    setNewTodo(data);
-    addTodo();
+    // setNewTodo(data);
+    addTask(data);
     reset();
   };
   return (
