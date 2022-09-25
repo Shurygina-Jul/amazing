@@ -2,7 +2,14 @@ import { useEvent, useList, useStore } from "effector-react";
 
 import { Button, Checkbox, Input } from "@mui/material";
 
-import { $tasks, $todoDeleting, todoDeleteClicked, todoToggleClicked } from "store";
+import {
+  $tasks,
+  $todoDeleting,
+  descriptionUpdateClicked,
+  titleUpdateClicked,
+  todoDeleteClicked,
+  todoToggleClicked,
+} from "store";
 
 function TodoList() {
   const tasks = useStore($tasks);
@@ -11,6 +18,8 @@ function TodoList() {
   const todoDeleting = useStore($todoDeleting);
   const handleMessageDelete = useEvent(todoDeleteClicked);
   const handleToddleStatus = useEvent(todoToggleClicked);
+  const handleTitleUpdate = useEvent(titleUpdateClicked);
+  const handleDescriptionUpdate = useEvent(descriptionUpdateClicked);
 
   const list = useList($tasks, {
     keys: [todoDeleting],
@@ -20,15 +29,13 @@ function TodoList() {
         <Checkbox checked={task.done} onClick={() => handleToddleStatus(task)} />
         <Input
           value={task.title}
-          // onChange={(event) =>
-          //   updateTask({ id: task.id, title: event.target.value, description: task.description })
-          // }
+          onChange={(event) => handleTitleUpdate({ ...task, title: event.target.value })}
         />
         <Input
           value={task.description}
-          // onChange={(event) =>
-          //   updateTask({ id: task.id, title: task.title, description: event.target.value })
-          // }
+          onChange={(event) =>
+            handleDescriptionUpdate({ ...task, description: event.target.value })
+          }
         />
         <Button onClick={() => handleMessageDelete(task)} disabled={todoDeleting}>
           Delete

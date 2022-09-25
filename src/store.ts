@@ -159,3 +159,53 @@ $tasks.on(todoToggleFx.done, (todos, { params: toToggle }) =>
     done: todo.id === toToggle.id ? !todo.done : todo.done,
   })),
 );
+
+//TODO: написать общую функцию которая принимает изменяемое поле
+
+//изменение заголовка
+export const titleUpdateClicked = createEvent<ITask>();
+
+export const titleUpdateFx = createEffect(async (todo: ITask) => {
+  const history = await todosLoadFx();
+  const updated = history.map((found) => ({
+    ...found,
+    title: found.id === todo?.id ? todo.title : found.title,
+  }));
+  setData(updated);
+});
+
+sample({
+  clock: titleUpdateClicked,
+  target: titleUpdateFx,
+});
+
+$tasks.on(titleUpdateFx.done, (todos, { params: toUpdate }) =>
+  todos.map((todo) => ({
+    ...todo,
+    title: todo.id === toUpdate?.id ? toUpdate.title : todo.title,
+  })),
+);
+
+//изменение описания
+export const descriptionUpdateClicked = createEvent<ITask>();
+
+export const descriptionUpdateFx = createEffect(async (todo: ITask) => {
+  const history = await todosLoadFx();
+  const updated = history.map((found) => ({
+    ...found,
+    description: found.id === todo?.id ? todo.description : found.description,
+  }));
+  setData(updated);
+});
+
+sample({
+  clock: descriptionUpdateClicked,
+  target: descriptionUpdateFx,
+});
+
+$tasks.on(descriptionUpdateFx.done, (todos, { params: toUpdate }) =>
+  todos.map((todo) => ({
+    ...todo,
+    description: todo.id === toUpdate?.id ? toUpdate.description : todo.description,
+  })),
+);
