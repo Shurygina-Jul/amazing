@@ -2,7 +2,7 @@ import { useEvent, useList, useStore } from "effector-react";
 
 import { Button, Checkbox, Input } from "@mui/material";
 
-import { $tasks, $todoDeleting, todoDeleteClicked } from "store";
+import { $tasks, $todoDeleting, todoDeleteClicked, todoToggleClicked } from "store";
 
 function TodoList() {
   const tasks = useStore($tasks);
@@ -10,16 +10,14 @@ function TodoList() {
 
   const todoDeleting = useStore($todoDeleting);
   const handleMessageDelete = useEvent(todoDeleteClicked);
+  const handleToddleStatus = useEvent(todoToggleClicked);
 
   const list = useList($tasks, {
     keys: [todoDeleting],
     fn: (task) => (
       <div>
         <div>Дата создания {task.date}</div>
-        <Checkbox
-          checked={task.done}
-          //onClick={() => toggleTodo(task.id)}
-        />
+        <Checkbox checked={task.done} onClick={() => handleToddleStatus(task)} />
         <Input
           value={task.title}
           // onChange={(event) =>

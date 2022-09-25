@@ -86,7 +86,7 @@ export const todosLoadFx = createEffect<void, ITask[], Error>(async () => {
 
 export const todoSendFx = createEffect(async (task: ITask) => {
   const todo: ITask = {
-    id: createId(),
+    id: Number(createId()),
     timestamp: Date.now(),
     date: dayjs(new Date().toString()).format("YYYY-MM-DD HH:mm:ss"),
     title: task?.title,
@@ -133,4 +133,29 @@ sample({
 
 $tasks.on(todoDeleteFx.done, (todos, { params: toDelete }) =>
   todos.filter((todo) => todo.id !== toDelete.id),
+);
+
+//преключение статуса
+export const todoToggleClicked = createEvent<ITask>();
+
+export const todoToggleFx = createEffect(async (todo: ITask) => {
+  const history = await todosLoadFx();
+  const updated = history.map((found) => ({
+    ...found,
+    done: found.id === todo?.id ? !found.done : todo.done,
+  }));
+  await wait();
+  setData(updated);
+});
+
+sample({
+  clock: todoToggleClicked,
+  target: todoToggleFx,
+});
+
+$tasks.on(todoToggleFx.done, (todos, { params: toToggle }) =>
+  todos.map((todo) => ({
+    ...todo,
+    done: todo.id === toToggle.id ? !todo.done : todo.done,
+  })),
 );
