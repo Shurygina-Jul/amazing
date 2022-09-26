@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { createEvent, createStore, createEffect, sample } from "effector";
-import { createId, getData, setData, wait } from "helpers";
+import { getData, setData, wait } from "helpers";
 import { ITask } from "interface";
 
 // export interface Todo {
@@ -86,7 +86,7 @@ export const todosLoadFx = createEffect<void, ITask[], Error>(async () => {
 
 export const todoSendFx = createEffect(async (task: ITask) => {
   const todo: ITask = {
-    id: Number(createId()),
+    id: new Date().getTime(),
     timestamp: Date.now(),
     date: dayjs(new Date().toString()).format("YYYY-MM-DD HH:mm:ss"),
     title: task?.title,
