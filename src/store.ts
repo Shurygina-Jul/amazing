@@ -209,3 +209,19 @@ $tasks.on(descriptionUpdateFx.done, (todos, { params: toUpdate }) =>
     description: todo.id === toUpdate?.id ? toUpdate.description : todo.description,
   })),
 );
+
+//фильтровать по статусу
+export const filterDoneClicked = createEvent<boolean | undefined>();
+
+export const filterDoneFx = createEffect(async () => {
+  const history = await todosLoadFx();
+});
+
+sample({
+  clock: filterDoneClicked,
+  target: filterDoneFx,
+});
+
+$tasks.on(filterDoneFx.done, (todos, { params: done }) =>
+  done === undefined ? todos : todos.filter((todo) => todo.done === Boolean(done)),
+);

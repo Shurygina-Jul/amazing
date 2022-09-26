@@ -6,10 +6,12 @@ import {
   $tasks,
   $todoDeleting,
   descriptionUpdateClicked,
+  filterDoneClicked,
   titleUpdateClicked,
   todoDeleteClicked,
   todoToggleClicked,
 } from "store";
+import Filter from "./Filter";
 
 function TodoList() {
   const tasks = useStore($tasks);
@@ -44,7 +46,12 @@ function TodoList() {
     ),
   });
 
-  return <div>{list}</div>;
+  return (
+    <>
+      {/* <Filter /> */}
+      <div>{list}</div>
+    </>
+  );
 }
 
 export default TodoList;

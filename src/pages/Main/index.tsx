@@ -8,6 +8,7 @@ import SendTodo from "./SendTodo";
 import Form from "./Form";
 import TodoList from "./TodoList";
 import { pageMounted } from "store";
+import Filter from "./Filter";
 
 export function Main() {
   const handlePageMount = useEvent(pageMounted);
@@ -20,6 +21,7 @@ export function Main() {
       {/* <Todos />
       <SendTodo />
       <hr /> */}
+      <Filter />
       <TodoList />
       <Form />
     </div>
