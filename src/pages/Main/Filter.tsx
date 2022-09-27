@@ -1,4 +1,4 @@
-import Button from "components/UI/Button";
+import Button from "components/Button";
 import { useEvent } from "effector-react";
 
 import { filterDoneClicked } from "store";

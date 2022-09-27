@@ -1,10 +1,10 @@
 import { Controller, useForm } from "react-hook-form";
 
-import Button from "components/UI/Button";
+import Button from "components/Button";
 
 import { addTask } from "store";
-import LabelInput from "components/UI/LabelInput";
-import { TextInput } from "components/UI/TextInput";
+import LabelInput from "components/LabelInput";
+import { TextInput } from "components/TextInput";
 
 import Select from "react-select";
 

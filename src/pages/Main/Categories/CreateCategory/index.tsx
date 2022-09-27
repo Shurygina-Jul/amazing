@@ -1,9 +1,9 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useStore } from "effector-react";
 
-import Button from "components/UI/Button";
-import LabelInput from "components/UI/LabelInput";
-import { TextInput } from "components/UI/TextInput";
+import Button from "components/Button";
+import LabelInput from "components/LabelInput";
+import { TextInput } from "components/TextInput";
 
 import { $category, add } from "./store";
 
