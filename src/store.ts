@@ -79,7 +79,7 @@ export const pageMounted = createEvent();
 
 export const todosLoadFx = createEffect<void, ITask[], Error>(async () => {
   const history = getData();
-  await wait();
+  //await wait();
 
   return history ?? [];
 });
@@ -95,7 +95,7 @@ export const todoSendFx = createEffect(async (task: ITask) => {
   };
   const history = await todosLoadFx();
   setData([...history, todo]);
-  await wait();
+  //await wait();
 
   return todo;
 });
@@ -103,7 +103,7 @@ export const todoSendFx = createEffect(async (task: ITask) => {
 export const todoDeleteFx = createEffect(async (todo: ITask) => {
   const history = await todosLoadFx();
   const updated = history.filter((found) => found.id !== todo.id);
-  await wait();
+  //await wait();
   setData(updated);
 });
 
@@ -144,7 +144,6 @@ export const todoToggleFx = createEffect(async (todo: ITask) => {
     ...found,
     done: found.id === todo?.id ? !found.done : todo.done,
   }));
-  await wait();
   setData(updated);
 });
 
@@ -214,7 +213,7 @@ $tasks.on(descriptionUpdateFx.done, (todos, { params: toUpdate }) =>
 export const filterDoneClicked = createEvent<boolean | undefined>();
 
 export const filterDoneFx = createEffect(async () => {
-  const history = await todosLoadFx();
+  await todosLoadFx();
 });
 
 sample({

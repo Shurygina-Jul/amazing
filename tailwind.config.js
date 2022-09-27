@@ -15,6 +15,7 @@ module.exports = {
       lazur: "#5B8CC4",
       grey: "#BACEE6",
       red: "#E84545",
+      green: "#00CC00",
     },
     fontSize: {
       base: ["18px", "28px"],

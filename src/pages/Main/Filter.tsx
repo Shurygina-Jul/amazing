@@ -1,3 +1,4 @@
+import Button from "components/UI/Button";
 import { useEvent } from "effector-react";
 
 import { filterDoneClicked } from "store";
@@ -6,24 +7,20 @@ function Filter() {
   const handleFilter = useEvent(filterDoneClicked);
 
   return (
-    <div>
-      <p>Фильтровать по статусу</p>
-      <button className="rounded-sm bg-smoke px-4 py-1" onClick={() => handleFilter(undefined)}>
-        Показать все
-      </button>
-      <button
-        className="rounded-sm bg-lazur bg-opacity-50 px-4 py-1"
+    <section>
+      <Button className="bg-smoke" onClick={() => handleFilter(undefined)} text="Показать все" />
+      <Button
+        className=" bg-green bg-opacity-50"
         onClick={() => handleFilter(true)}
-      >
-        Выполено
-      </button>
-      <button
-        className="rounded-sm bg-red bg-opacity-50 px-4 py-1"
+        text="Выполено"
+      />
+
+      <Button
+        className="bg-red bg-opacity-50"
         onClick={() => handleFilter(false)}
-      >
-        Не Выполено
-      </button>
-    </div>
+        text="Не Выполено"
+      />
+    </section>
   );
 }
 
