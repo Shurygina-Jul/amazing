@@ -7,6 +7,7 @@ import Filter from "./Filter";
 
 import { pageMounted } from "store";
 import Button from "components/UI/Button";
+import CreateCategory from "pages/Categories/CreateCategory";
 
 export function Main() {
   const [formVisible, setFormVisible] = useState(false);
@@ -31,11 +32,11 @@ export function Main() {
 
   return (
     <div className="mr-auto ml-auto max-w-[1280px]">
-      <header className="mb-4 flex">
+      <header className="mb-4 grid h-[120px] grid-cols-3">
         <Button
           text="Создать категорию"
           className="mr-4 bg-lazur bg-opacity-70"
-          onClick={() => handleForm()}
+          onClick={() => handleCategory()}
         />
         <Button
           text="Создать заметку"
@@ -48,7 +49,8 @@ export function Main() {
           onClick={() => handleFilter()}
         />
       </header>
-      <div className="flex justify-between">
+      <div className="grid grid-cols-3">
+        {categoryVisible && <CreateCategory />}
         {formVisible && <Form />}
         {filterVisible && <Filter />}
       </div>

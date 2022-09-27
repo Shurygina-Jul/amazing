@@ -1,28 +1,26 @@
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useStore } from "effector-react";
+
 import Button from "components/UI/Button";
 import LabelInput from "components/UI/LabelInput";
 import { TextInput } from "components/UI/TextInput";
-import { useStore } from "effector-react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+
 import { $category, add } from "./store";
 
 function CreateCategory() {
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors, isDirty },
+    reset,
   } = useForm<any>();
-
-  let navigate = useNavigate();
 
   const category = useStore($category);
 
   const onSubmit: SubmitHandler<any> = (data) => {
     add(data);
     localStorage.setItem("category", JSON.stringify(category));
-    console.log("Категория успешно создана");
-    navigate("/create-task");
+    reset();
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

@@ -79,7 +79,7 @@ export const pageMounted = createEvent();
 
 export const todosLoadFx = createEffect<void, ITask[], Error>(async () => {
   const history = getData();
-  //await wait();
+  await wait();
 
   return history ?? [];
 });
@@ -92,10 +92,11 @@ export const todoSendFx = createEffect(async (task: ITask) => {
     title: task?.title,
     description: task?.description,
     done: false,
+    category: { label: task?.category?.label, value: task?.category?.value },
   };
   const history = await todosLoadFx();
   setData([...history, todo]);
-  //await wait();
+  await wait();
 
   return todo;
 });
@@ -103,7 +104,7 @@ export const todoSendFx = createEffect(async (task: ITask) => {
 export const todoDeleteFx = createEffect(async (todo: ITask) => {
   const history = await todosLoadFx();
   const updated = history.filter((found) => found.id !== todo.id);
-  //await wait();
+  await wait();
   setData(updated);
 });
 

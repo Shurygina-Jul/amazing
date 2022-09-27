@@ -5,4 +5,5 @@ export interface ITask {
   description: string;
   done: boolean;
   timestamp: any;
+  category: { label: string; value: string };
 }

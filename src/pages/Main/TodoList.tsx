@@ -17,7 +17,7 @@ import Checkbox from "@mui/material/Checkbox";
 
 function TodoList() {
   const tasks = useStore($tasks);
-  console.log("tasks", tasks);
+  //console.log("tasks", tasks);
 
   const todoDeleting = useStore($todoDeleting);
   const handleMessageDelete = useEvent(todoDeleteClicked);
@@ -33,6 +33,7 @@ function TodoList() {
         <time>{task.date}</time>
         <Checkbox checked={task.done} onClick={() => handleToddleStatus(task)} />
         <span>Статус</span>
+        <p>Категория {task?.category?.label}</p>
         <LabelInput label="Название">
           <input
             className="bg-smoke"
