@@ -1,31 +1,27 @@
 import { useList, useStore } from "effector-react";
 
-import { $tasks, $todoDeleting } from "store";
-import Table from "./Table";
+import Todo from "./Todo";
 
-import Task from "./Task";
+import { $tasks, $todoDeleting } from "store";
 
 function TaskList() {
-  //console.log("tasks", tasks);
-
   const todoDeleting = useStore($todoDeleting);
 
   const list = useList($tasks, {
     keys: [todoDeleting],
-    fn: (task) => <Table task={task} />,
+    fn: (task) => <Todo task={task} />,
   });
 
-  // return <div className="grid grid-cols-3 gap-2">{list}</div>;
   return (
-    <table className="w-full">
+    <table className="w-full text-center">
       <thead>
-        <tr className="border-[1px] border-lazur">
-          <td className="w-4 border-r-[1px] border-lazur">ID</td>
-          <td className="w-48 border-r-[1px] border-lazur">Дата создания</td>
-          <td className="w-16 border-r-[1px] border-lazur">Статус</td>
-          <td className="w-[25%] border-r-[1px] border-lazur">Категория</td>
-          <td className="w-[25%] border-r-[1px] border-lazur">Название</td>
-          <td className="border-r-[1px] border-lazur">Описание</td>
+        <tr className="border-[1px] border-green">
+          <td className="w-4 border-r-[1px] border-green p-2">ID</td>
+          <td className="w-48 border-r-[1px] border-green p-2">Дата создания</td>
+          <td className="w-16 border-r-[1px] border-green p-2">Статус</td>
+          <td className="w-[25%] border-r-[1px] border-green p-2">Категория</td>
+          <td className="w-[25%] border-r-[1px] border-green p-2">Название</td>
+          <td className="p-2">Описание</td>
         </tr>
       </thead>
       <tbody>{list}</tbody>

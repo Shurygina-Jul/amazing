@@ -1,3 +1,4 @@
+const { green } = require("@mui/material/colors");
 const plugin = require("tailwindcss/plugin");
 
 module.exports = {
@@ -10,12 +11,13 @@ module.exports = {
     },
     colors: {
       transparent: "transparent",
-      smoke: "#E8EFF7",
+      smoke: "#EBE2DD",
       night: "#1C334E",
-      lazur: "#5B8CC4",
+      lazur: "#BBCCDE",
       grey: "#BACEE6",
-      red: "#E84545",
-      green: "#00CC00",
+      red: "#D27C54",
+      green: "#94A291",
+      dark_green: "#364037",
     },
     fontSize: {
       base: ["18px", "28px"],

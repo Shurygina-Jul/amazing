@@ -26,8 +26,6 @@ function Form() {
   }
 
   const onSubmit = async (data: any) => {
-    //console.log(data);
-    // setNewTodo(data);
     addTask(data);
     reset();
   };
