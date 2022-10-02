@@ -13,7 +13,7 @@ import {
   todoDeleteClicked,
   todoToggleClicked,
   $tasks,
-} from "store";
+} from "shared/store";
 
 function CurrentTask() {
   const { state }: any = useLocation();

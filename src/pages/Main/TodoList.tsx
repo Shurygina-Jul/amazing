@@ -2,7 +2,7 @@ import { useList, useStore } from "effector-react";
 
 import Todo from "./Todo";
 
-import { $tasks, $todoDeleting } from "store";
+import { $tasks, $todoDeleting } from "shared/store";
 
 function TaskList() {
   const todoDeleting = useStore($todoDeleting);

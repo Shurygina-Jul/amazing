@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
 
-import { routesConfig } from "routesConfig";
+import { routesConfig } from "shared/routesConfig";
 
 function App() {
   return (

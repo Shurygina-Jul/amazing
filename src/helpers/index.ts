@@ -1,4 +1,4 @@
-import { ITask } from "interface";
+import { ITask } from "shared/interface";
 
 const LocalStorageKey = "todoList";
 

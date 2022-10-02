@@ -1,7 +1,8 @@
-import Button from "components/Button";
 import { useEvent } from "effector-react";
 
-import { filterDoneClicked } from "store";
+import Button from "components/Button";
+
+import { filterDoneClicked } from "shared/store";
 
 function Filter() {
   const handleFilter = useEvent(filterDoneClicked);

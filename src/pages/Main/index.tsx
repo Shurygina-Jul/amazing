@@ -6,9 +6,9 @@ import Button from "components/Button";
 import Form from "./Form";
 import TodoList from "./TodoList";
 import Filter from "./Filter";
+import CreateCategory from "./Categories/CreateCategory";
 
-import { pageMounted } from "store";
-import CreateCategory from "pages/Main/Categories/CreateCategory";
+import { pageMounted } from "shared/store";
 
 export function Main() {
   const [formVisible, setFormVisible] = useState(false);

@@ -2,7 +2,7 @@ import { Checkbox } from "@mui/material";
 import { useEvent } from "effector-react";
 import { Link } from "react-router-dom";
 
-import { descriptionUpdateClicked, titleUpdateClicked, todoToggleClicked } from "store";
+import { descriptionUpdateClicked, titleUpdateClicked, todoToggleClicked } from "shared/store";
 
 function Todo(props: any) {
   const { task } = props;

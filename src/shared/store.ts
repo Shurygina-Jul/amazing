@@ -1,7 +1,9 @@
 import dayjs from "dayjs";
 import { createEvent, createStore, createEffect, sample } from "effector";
-import { getData, setData, wait } from "helpers";
-import { ITask } from "interface";
+
+import { getData, setData } from "helpers";
+
+import { ITask } from "./interface";
 
 export const $tasks = createStore<ITask[]>([]);
 
