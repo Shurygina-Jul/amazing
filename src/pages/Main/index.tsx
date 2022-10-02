@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useEvent } from "effector-react";
 
+import Button from "components/Button";
+
 import Form from "./Form";
 import TodoList from "./TodoList";
 import Filter from "./Filter";
 
 import { pageMounted } from "store";
-import Button from "components/Button";
 import CreateCategory from "pages/Main/Categories/CreateCategory";
 
 export function Main() {

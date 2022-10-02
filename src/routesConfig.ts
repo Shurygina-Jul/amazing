@@ -3,5 +3,5 @@ import CurrentTask from "pages/CurrentTask";
 
 export const routesConfig = [
   { path: "/", element: Main },
-  { path: "/:id", element: CurrentTask },
+  { path: "/task/:id", element: CurrentTask },
 ];
