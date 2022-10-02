@@ -7,7 +7,7 @@ function LabelInput(props: ILabelInput) {
 
   return (
     <label className={clsx(className)}>
-      {label && <p className="text-xl font-medium text-lazur">{label}</p>}
+      {label && <p className="text-xl font-medium">{label}</p>}
       {children}
       {errors && <p className="text-red">Ошибка: Необходмио заполнить поле</p>}
     </label>

@@ -33,28 +33,33 @@ export function Main() {
 
   return (
     <div className="mr-auto ml-auto max-w-[1280px]">
-      <header className="mb-4 grid h-[120px] grid-cols-3">
-        <Button
-          text="Создать категорию"
-          className="mr-4 bg-lazur bg-opacity-70"
-          onClick={() => handleCategory()}
-        />
-        <Button
-          text="Создать заметку"
-          className="mr-4 bg-lazur bg-opacity-70"
-          onClick={() => handleForm()}
-        />
-        <Button
-          text="Фильтровать по статусу"
-          className="bg-lazur bg-opacity-70"
-          onClick={() => handleFilter()}
-        />
+      {/* TODO: вынести в отдельный компонет */}
+      <header className="mb-4 grid grid-cols-3">
+        <div>
+          <Button
+            text="Создать категорию"
+            className="mr-4 mb-8 border-2 border-lazur hover:bg-lazur"
+            onClick={() => handleCategory()}
+          />
+          {categoryVisible && <CreateCategory />}
+        </div>
+        <div>
+          <Button
+            text="Создать заметку"
+            className="mr-4 mb-8 border-2 border-lazur hover:bg-lazur"
+            onClick={() => handleForm()}
+          />
+          {formVisible && <Form />}
+        </div>
+        <div>
+          <Button
+            text="Фильтровать по статусу"
+            className="mb-8 border-2 border-lazur hover:bg-lazur"
+            onClick={() => handleFilter()}
+          />
+          {filterVisible && <Filter />}
+        </div>
       </header>
-      <div className="grid grid-cols-3">
-        {categoryVisible && <CreateCategory />}
-        {formVisible && <Form />}
-        {filterVisible && <Filter />}
-      </div>
 
       <TodoList />
     </div>

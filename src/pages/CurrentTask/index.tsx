@@ -34,15 +34,16 @@ function CurrentTask() {
     handleMessageDelete(res?.task);
     navigate("/");
   }
+
   return (
     <article className="m-auto mt-32 max-w-[1280px]">
-      <h5 className="font-medium text-lazur">Дата создания</h5>
+      <h5 className="font-medium">Дата создания</h5>
       <time>{res?.date}</time>
       {/* TODO:исправить баг со сменой статуса */}
       <Checkbox checked={res?.done} onClick={() => handleToddleStatus(res)} />
-      <span className="font-medium text-lazur">Статус</span>
+      <span className="font-medium">Статус</span>
       <p>
-        <span className="font-medium text-lazur">Категория</span> {res?.category?.label}
+        <span className="font-medium ">Категория</span> {res?.category?.label}
       </p>
       <LabelInput label="Название">
         <input
@@ -59,12 +60,12 @@ function CurrentTask() {
       </LabelInput>
 
       <div className="mt-4">
-        <Button onClick={() => navigate("/")} text="Назад" className="bg-lazur bg-opacity-40" />
+        <Button onClick={() => navigate("/")} text="Назад" className="bg-lazur" />
         <Button
           onClick={() => handleClick()}
           disabled={todoDeleting}
           text="Удалить"
-          className="bg-red bg-opacity-40"
+          className="bg-red"
         />
       </div>
     </article>

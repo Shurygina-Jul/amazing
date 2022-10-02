@@ -31,8 +31,8 @@ function CreateCategory() {
           })}
         />
       </LabelInput>
-      <div className="inline-block rounded-lg bg-lazur text-smoke">
-        <Button text="Создать" type="submit" className="rounded-lg" disabled={!isDirty} />
+      <div className="inline-block bg-lazur">
+        <Button text="Создать" type="submit" disabled={!isDirty} />
       </div>
     </form>
   );
