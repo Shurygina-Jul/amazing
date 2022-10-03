@@ -76,7 +76,7 @@ export const todoToggleFx = createEffect(async (todo: ITask) => {
   const history = await todosLoadFx();
   const updated = history.map((found) => ({
     ...found,
-    done: found.id === todo?.id ? !found.done : todo.done,
+    done: found.id === todo?.id ? !found.done : found.done,
   }));
   setData(updated);
 });
