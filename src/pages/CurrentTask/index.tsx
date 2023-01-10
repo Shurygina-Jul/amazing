@@ -31,7 +31,7 @@ function CurrentTask() {
   const navigate = useNavigate();
 
   function handleClick() {
-    handleMessageDelete(res?.task);
+    handleMessageDelete(res);
     navigate("/");
   }
 
@@ -47,6 +47,7 @@ function CurrentTask() {
       </p>
       <LabelInput label="Название">
         <input
+          className="text-ellipsis"
           value={res?.title}
           onChange={(event) => handleTitleUpdate({ ...res, title: event?.target?.value })}
         />
@@ -54,6 +55,7 @@ function CurrentTask() {
 
       <LabelInput label="Описание">
         <input
+          className="text-ellipsis"
           value={res?.description}
           onChange={(event) => handleDescriptionUpdate({ ...res, description: event.target.value })}
         />
