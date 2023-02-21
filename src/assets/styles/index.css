@@ -5,5 +5,5 @@
 @tailwind utilities;
 
 body {
-@apply font-roboto text-night;
+  @apply font-roboto text-dark_green;
 }
