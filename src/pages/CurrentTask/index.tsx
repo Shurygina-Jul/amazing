@@ -32,7 +32,7 @@ function CurrentTask() {
 
   function handleClick() {
     handleMessageDelete(res);
-    navigate("/");
+    navigate("/amazing");
   }
 
   return (
@@ -62,7 +62,7 @@ function CurrentTask() {
       </LabelInput>
 
       <div className="mt-4">
-        <Button onClick={() => navigate("/")} text="Назад" className="bg-lazur" />
+        <Button onClick={() => navigate("/amazing")} text="Назад" className="bg-lazur" />
         <Button
           onClick={() => handleClick()}
           disabled={todoDeleting}
