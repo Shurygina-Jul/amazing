@@ -32,7 +32,11 @@ function CurrentTask() {
 
   function handleClick() {
     handleMessageDelete(res);
+<<<<<<< HEAD
     navigate("/amazing");
+=======
+    navigate("/");
+>>>>>>> parent of 35f16a5 (Updates)
   }
 
   return (
@@ -62,7 +66,11 @@ function CurrentTask() {
       </LabelInput>
 
       <div className="mt-4">
+<<<<<<< HEAD
         <Button onClick={() => navigate("/amazing")} text="Назад" className="bg-lazur" />
+=======
+        <Button onClick={() => navigate("/")} text="Назад" className="bg-lazur" />
+>>>>>>> parent of 35f16a5 (Updates)
         <Button
           onClick={() => handleClick()}
           disabled={todoDeleting}
