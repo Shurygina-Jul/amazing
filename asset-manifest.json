@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/amazing/static/css/main.4100d067.css",
+    "main.js": "/amazing/static/js/main.fab31277.js",
+    "static/media/Roboto-Regular.woff": "/amazing/static/media/Roboto-Regular.31012f9b3e3da44f87e8.woff",
+    "static/media/Roboto-Regular.woff2": "/amazing/static/media/Roboto-Regular.a25806274237d06e00a6.woff2",
+    "index.html": "/amazing/index.html",
+    "main.4100d067.css.map": "/amazing/static/css/main.4100d067.css.map",
+    "main.fab31277.js.map": "/amazing/static/js/main.fab31277.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4100d067.css",
+    "static/js/main.fab31277.js"
+  ]
+}
